@@ -1,12 +1,25 @@
 "use strict";
 const pages = document.getElementById("pages");
 let light = true;
+function defaultLightSet() {
+    const lightdata = localStorage.getItem("light");
+    if(lightdata === "off") {
+        light = false;
+        document.body.className = "dark";
+    } else {
+        light = true;
+        document.body.className = "light";
+    }
+}
+defaultLightSet();
 function togglelight() {
     light = !light;
     if(light) {
         document.body.className = "light";
+        localStorage.setItem("light","on");
     } else {
         document.body.className = "dark";
+        localStorage.setItem("light","off");
     }
 }
 let nav2shown = false;
