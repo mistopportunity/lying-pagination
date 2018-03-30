@@ -133,7 +133,12 @@ function getpage(pagefile,callback) {
     const client = new XMLHttpRequest();
     client.open("GET", pagefile);
     client.onload = function() {
-        callback(client.responseText);
+        if(client.status === 200) {
+            callback(client.responseText);
+        } else {
+            callback(`${pagefile} is missing.`);
+        }
+
     }
     client.onerror = function() {
         callback(`${pagefile} is missing.`);
@@ -284,8 +289,15 @@ function loadIndex() {
 
     client.onload = function() {
         clearpages();
-        addpages([client.responseText]);
-        settitle("index");
+
+        if(client.status === 200) {
+            addpages([client.responseText]);
+            settitle("index");
+        } else {
+            addpages(["Error loading index file. Sorry :("])
+            settitle("whoops");
+        }
+
         if(bookmarkPages.length > 0) {
             addpages(bookmarkPages);
         }
