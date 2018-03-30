@@ -133,7 +133,7 @@ function getpage(pagefile,callback) {
     const client = new XMLHttpRequest();
     client.open("GET", pagefile);
     client.onload = function() {
-        if(client.status === 200) {
+        if(client.status === 200 || client.status === 0) {
             callback(client.responseText);
         } else {
             callback(`${pagefile} is missing.`);
@@ -290,7 +290,7 @@ function loadIndex() {
     client.onload = function() {
         clearpages();
 
-        if(client.status === 200) {
+        if(client.status === 200 || client.status === 0) {
             addpages([client.responseText]);
             settitle("index");
         } else {
