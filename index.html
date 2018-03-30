@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <title>index</title>
+</head>
+<body class="light">
+    <ul class="navbar" id="navbar1">
+        <li><a onClick="goback()" id="backbutton" style="text-align:right">&lsaquo;</a></li>
+        <li><a onClick="togglenavigation2()" id="title" style="text-align:center">index</a></li>
+        <li><a onClick="goforward()" id="forwardbutton" style="text-align:left">&rsaquo;</a></li>
+        <div style="display:none" id="navbar2">
+            <li><a id="bookmarkbutton" onClick="bookmarklocation()" style="text-align:right"></a></li>
+            <li><a id="lightToggle" onClick="togglelight()"style="text-align:center">toggle lighting</a></li>
+            <li><a id="indexreturn" onClick="returntoindex()" style="text-align:left">return to index</a></li>
+        </div>
+    </ul>
+    <div id="pages">
+        <!-- <div><p></p></div> -->
+        <!-- 30 lines max / 50 characters per line = 1500 characters--> 
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

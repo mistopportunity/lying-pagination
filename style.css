@@ -1,0 +1,240 @@
+body, html {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+#pages div p {
+    margin: 0;
+    padding: 3vh;
+    font-family: monospace;
+    font-size: 2.5vh;
+    height: 84vh;
+    line-height: 3vh;
+}
+#pages div p span.bold {
+    font-weight: bold;
+}
+#pages div p span.underline {
+    text-decoration: underline;
+}
+#pages div p span.link {
+    cursor: pointer;
+    padding-left: 1vh;
+    padding-right: 1.4vh;
+    padding-top: 0.25vh;
+    padding-bottom: 0.25vh;
+}
+.light #pages div p span.link {
+    color: white;
+    background-color: #252525;
+}
+.dark #pages div p span.link {
+    color: #000000;
+    background-color: #ffffff;
+}
+#pages div p span.link:hover {
+    text-decoration: underline;
+}
+.dark #pages div p span.light-only {
+    color: #000000;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.light #pages div p span.dark-only {
+    color: white;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.dark #pages div p span.dark-only {
+    color: #3e3e3e;
+}
+.light #pages div p span.light-only {
+    color: #ababab;
+}
+.dark #pages div p span.light-overlap {
+    display: none;
+}
+.light #pages div p span.dark-overlap {
+    display: none;
+}
+.light {
+    background-color: #f5f5f5;
+    color: #565656;
+}
+.dark {
+    background-color: #252525;
+    color: white;
+}
+.light #pages div {
+    background-color: white;
+    border-color: #dedede;
+    box-shadow: #dedede 0 0 2vh 0;
+}
+.dark #pages div {
+    background-color: #000000;
+    border-color: #1b1b1b;
+    box-shadow: #1b1b1b 0 0 2vh 0;
+}
+.navbar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    position: fixed;
+    display: inline-block;
+    width: 100%;
+    z-index: 1;
+    top: 0%;
+}
+.navbar li {
+    width: 33.33%;
+    float: left;
+}
+
+.navbar li a.disabled {
+    cursor: default;
+}
+.navbar li a {
+    display: block;
+    text-decoration: none;
+    font-size: 2.5vh;
+    font-family: sans-serif;
+    padding: 1.2vh;
+    cursor: pointer;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.navbar:nth-child(1) a {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+
+
+#pages {
+    width: 100%;
+    top: 5.5%;
+    position: relative;
+}
+#pages.doubletop {
+    top: 11%;
+}
+#pages div {
+    width: 75vh;
+    height: 90vh;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    margin-top: 1.8vh;
+    border-style: solid;
+    border-width: 0.1vh;
+}
+#pages {
+    margin-bottom: 1.8vh;
+}
+@media only screen and (max-width: 78.6vh) {
+    #pages div {
+        width: 92vw;
+        height: 110.4vw;
+
+        border-width: 0.122vw;
+
+        margin-top: 3.75vw;
+    }
+    #pages {
+        margin-bottom: 4vw;
+    }
+    .light .pages div {
+        box-shadow: #dedede 0 0 2.45vw 0;
+    }
+    .dark .pages div {
+        box-shadow: #1b1b1b 0 0 2.45vw 0;
+    }
+    #pages div p {
+        margin: 0;
+        padding: 3.67vw;
+        font-family: monospace;
+        font-size: 3.06vw;
+        height: 103.06vw;
+        line-height: 3.67vw;
+    }
+    .navbar li a {
+        font-size: 4.5vw;
+        padding: 1vw;
+    }
+    #pages {
+        top: 7vw;
+    }
+    #pages.doubletop {
+        top: 15vw;
+    }
+
+
+    #pages div p span.link {    
+        padding-left: 1.2vw;
+        padding-right: 1.68vw;
+        padding-top: 0.3vw;
+        padding-bottom: 0.3vw;
+    }
+
+}
+
+
+
+
+.navbar li a:hover {
+    background-color: #393b40; /* COLOR 1 */
+}
+
+.navbar li a.disabled:hover {
+    background-color: inherit;
+}
+
+.navbar {
+    color: white;
+}
+.light .navbar {
+    background-color: #313131;
+}
+.dark .navbar {
+    background-color: #1b1b1b;
+}
+.navbar li a {
+    color: white;
+}
+.navbar li {
+    background-color: inherit;
+}
+
+.navbar li a.disabled {
+    background-color: inherit;
+}
+.navbar li a.disabled:hover {
+    background-color: inherit;
+}
+
+
+#lightToggle,#forwardbutton,#backbutton {
+    background-color: black;
+    color: white;
+}
+
+#lightToggle:not(.disabled):hover,#forwardbutton:not(.disabled):hover,#backbutton:not(.disabled):hover {
+    background-color: #393b40;
+}
+

@@ -1,0 +1,33 @@
+<span class="bold underline">instructions</span>
+
+<br><br>
+
+format support: <span class="bold">bold & underline</span><br><br>
+
+<span class="bold">light-only & dark-only</span> - retains the spacing of these elements, ie, their linebreaks<br><br>
+
+<span class="bold">light-overlap & dark-overlap</span> - elements remain unrendered out of their light setting - be weary of overflowing the page<br><br>
+
+<span class="bold">[end-page]</span> ends the page (but not on the index)<br><br>
+
+
+<span class="link" onclick="navigate('pages/dummy1')">
+    <span class="light-overlap">3. Dummy three</span><span class="dark-overlap">1. Idiota uno</span>
+</span>
+
+<br><br>
+
+<span class="link" onclick="navigate('pages/dummy2')">
+    <span class="light-overlap">3. Dummy three</span><span class="dark-overlap">2. Idiota dos</span>
+</span>
+
+<br><br>
+
+<span class="link" onclick="navigate('pages/dummy3')">
+    <span class="light-overlap">3. Dummy three</span><span class="dark-overlap">3. Idiota tres</span>
+</span>
+<br><br>
+
+<span class="dark-only">You can only see this in the dark, ;)</span><br>
+
+30 lines max / 50 characters per line = 1500 characters
