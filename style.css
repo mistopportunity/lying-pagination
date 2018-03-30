@@ -149,7 +149,6 @@ body, html {
     #pages div {
         width: 92vw;
         border-width: 0.122vw;
-
         margin-top: 3.75vw;
     }
     #pages {
@@ -166,7 +165,6 @@ body, html {
         padding: 3.67vw;
         font-family: monospace;
         font-size: 3.06vw;
-        height: 103.06vw;
         line-height: 3.67vw;
     }
     .navbar li a {
