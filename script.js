@@ -168,7 +168,7 @@ function navigate(newlocation) {
     navigating = true;
     disableBackButton();
     disableForwardButton();
-    if(newlocation.indexOf("/") < 0) {
+    if(newlocation.indexOf("/") < 0 || newlocation === "pages/index") {
         loadIndex();
         return;
     }
@@ -347,6 +347,7 @@ function setup() {
     switch(hash) {
         case null:
         case "":
+        case "pages/index":
         case "index":
             loadIndex();
             break;
