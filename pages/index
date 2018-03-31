@@ -12,19 +12,19 @@ format support: <span class="bold">bold & underline</span><br><br>
 
 
 <span class="link" onclick="navigate('pages/dummy1')">
-    <span class="light-overlap">1. Dummy one</span><span class="dark-overlap">1. Idiota uno</span>
+    <span class="light-overlap">1. dummy one</span><span class="dark-overlap">1. idiota uno</span>
 </span>
 
 <br><br>
 
 <span class="link" onclick="navigate('pages/dummy2')">
-    <span class="light-overlap">2. Dummy two</span><span class="dark-overlap">2. Idiota dos</span>
+    <span class="light-overlap">2. dummy two</span><span class="dark-overlap">2. idiota dos</span>
 </span>
 
 <br><br>
 
 <span class="link" onclick="navigate('pages/dummy3')">
-    <span class="light-overlap">3. Dummy three</span><span class="dark-overlap">3. Idiota tres</span>
+    <span class="light-overlap">3. dummy three</span><span class="dark-overlap">3. idiota tres</span>
 </span>
 <br><br>
 

@@ -279,7 +279,7 @@ function loadIndex(callback) {
     }
     client.onload = function() {
         clearpages();
-        if(bookmarkpage.length !== null) {
+        if(bookmarkpage !== null) {
             addpages([bookmarkpage]);
         }
         if(client.status === 200 || client.status === 0) {
@@ -297,7 +297,7 @@ function loadIndex(callback) {
     }
     client.onerror = function() {
         clearpages();
-        if(bookmarkpage.length !== null) {
+        if(bookmarkpage !== null) {
             addpages([bookmarkpage]);
         }
         addpages(["Error loading index file. Sorry :("])
