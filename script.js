@@ -123,7 +123,6 @@ function enablepostindexbuttons() {
     setbookmarktext();
     indexbutton.textContent = "return to index";
 }
-
 function disablepostindexbuttons() {
     const bookmarkbutton = document.getElementById("bookmarkbutton");
     const indexbutton = document.getElementById("indexreturn");
@@ -132,16 +131,12 @@ function disablepostindexbuttons() {
     bookmarkbutton.textContent = "";
     indexbutton.textContent = "";
 }
-
 function settitle(title) {
     document.title = title;
     document.getElementById("title").textContent = title;
 }
-
-
 let historyIndex = 0;
 let history = ["pages/index"];
-
 function getpage(pagefile,callback) {
     const client = new XMLHttpRequest();
     client.open("GET", pagefile);
@@ -167,33 +162,24 @@ function navigate(newlocation) {
     disableBackButton();
     disableForwardButton();
     getpage(newlocation,function(page) {
-
         const historyStartLength = history.length-1;
         for(var i = historyIndex;i<historyStartLength;i++) {
             history.pop();
         }
         historyIndex = history.length;
-
         settitle(newlocation);
+        window.location.hash = newlocation;
         history.push(newlocation);
-
         clearpages();
         addpages(page.split("[end-page]"));
-
         if(nav2shown) {
             togglenavigation2()
         }
-
         logicalbuttonset();
-
         window.scrollTo(0,0);
-
         navigating = false;
-
     });
-
 }
-
 function logicalbuttonset() {
     if(historyIndex === 0) {
         disableBackButton();
@@ -210,84 +196,74 @@ function logicalbuttonset() {
     }
     enablepostindexbuttons();
 }
-
-function buttonnavigate() {
+function buttonnavigate(callback) {
     disableBackButton();
     disableForwardButton();
-
     getpage(history[historyIndex],function(page) {
-
         settitle(history[historyIndex]);
-
+        window.location.hash = newlocation;
         clearpages();
         addpages(page.split("[end-page]"));
-
         logicalbuttonset();
-
+        if(callback) {
+            callback();
+        }
         window.scrollTo(0,0);
-
         navigating = false;
-
-
     });
 }
-
 function goback() {
     if(navigating || !backButtonEnabled) {
         return;
     }
     navigating = true;
     historyIndex--;
-    if(nav2shown) {
-        togglenavigation2()
-    }
     if(historyIndex === 0) {
-        loadIndex();
+        loadIndex(function() {
+            if(nav2shown) {
+                togglenavigation2()
+            }
+        });
     } else {
-        buttonnavigate();
+        buttonnavigate(function() {
+            if(nav2shown) {
+                togglenavigation2()
+            }
+        });
     }
 }
-
 function goforward() {
     if(navigating || !forwardButtonEnabled) {
         return;
     }
     navigating = true;
     historyIndex++;
-    if(nav2shown) {
-        togglenavigation2()
-    }
-    buttonnavigate();
+    buttonnavigate(function () {
+        if(nav2shown) {
+            togglenavigation2(); //no like
+        }
+    });
 }
-
 function returntoindex() {
     if(navigating) {
         return;
     }
     navigating = true;
-
     historyIndex = 0;
-
-    togglenavigation2()
-
-    loadIndex();
+    loadIndex(togglenavigation2);
     
 }
-
-
-function loadIndex() {
+function loadIndex(callback) {
     logicalbuttonset();
     const client = new XMLHttpRequest();
     client.open("GET", "pages/index");
     const bookmarks = getbookmarks();
     const bookmarkPages = [];
     if(bookmarks !== null && bookmarks.length !== 0) {
-
         let runningPage = '<span class="bold underline">your bookmarks</span><br><br>';
         let runningCount = 1;
-    
         for(let i = 0;i<bookmarks.length;i++) {
-            if(runningCount == 14) { //change to 13 or something with testing
+            if(runningCount == 12) {
                 runningCount = 0;
                 bookmarkPages.push(runningPage);
                 runningPage = "";
@@ -299,20 +275,22 @@ function loadIndex() {
             bookmarkPages.push(runningPage);
         }
     }
-
     client.onload = function() {
         clearpages();
-
         if(client.status === 200 || client.status === 0) {
             addpages([client.responseText]);
             settitle("index");
+            window.location.hash = "";
         } else {
             addpages(["Error loading index file. Sorry :("])
             settitle("whoops");
+            window.location.hash = "";
         }
-
         if(bookmarkPages.length > 0) {
             addpages(bookmarkPages);
+        }
+        if(callback) {
+            callback();
         }
         window.scrollTo(0,0);
         navigating = false;
@@ -321,16 +299,18 @@ function loadIndex() {
         clearpages();
         addpages(["Error loading index file. Sorry :("])
         settitle("whoops");
+        window.location.hash = "";
         if(bookmarkPages.length > 0) {
             addpages(bookmarkPages);
+        }
+        if(callback) {
+            callback();
         }
         window.scrollTo(0,0);
         navigating = false;
     }
     client.send();
 }
-
-
 function clearpages() {
     while(pages.firstChild) {
         pages.removeChild(pages.firstChild);
@@ -345,5 +325,25 @@ function addpages(textwithhtml) {
         pages.appendChild(div);
     }
 }
-
-loadIndex();
+function setup() {
+    if(window.location.hash === "") {
+        loadIndex();
+        return;
+    }
+    let hash = decodeURIComponent(window.location.hash);
+    hash = hash.trim();
+    hash = hash.replace(/#/g,"");
+    switch(hash) {
+        case null:
+        case "":
+        case "index":
+            window.location.hash = "";
+            loadIndex();
+            break;
+        default:
+            navigating = false;
+            navigate(window.location.hash);
+            break;
+    }
+}
+setup();
