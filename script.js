@@ -41,11 +41,11 @@ function bookmarklocation() {
     bookmarking = true;
     const bookmark = document.getElementById("bookmarkbutton");
     bookmark.classList.toggle("disabled");
-    if(bookmarkexists(history[historyIndex])) {
-        removebookmark(history[historyIndex]);
+    if(bookmarkexists(pagehistory[historyIndex])) {
+        removebookmark(pagehistory[historyIndex]);
         bookmark.textContent = "removed!";
     } else {
-        addbookmark(history[historyIndex]);
+        addbookmark(pagehistory[historyIndex]);
         bookmark.textContent = "added!";
     }
     setTimeout(function() {
@@ -109,7 +109,7 @@ function disableForwardButton() {
     forwardButtonEnabled = false;
 }
 function setbookmarktext() {
-    if(bookmarkexists(history[historyIndex])) {
+    if(bookmarkexists(pagehistory[historyIndex])) {
         bookmarkbutton.textContent = "unsave";
     } else {
         bookmarkbutton.textContent = "save";
@@ -137,7 +137,7 @@ function settitle(title) {
     document.getElementById("title").textContent = title;
 }
 let historyIndex = 0;
-let history = ["pages/index"];
+let pagehistory = ["pages/index"];
 function getpage(pagefile,callback) {
     const client = new XMLHttpRequest();
     client.open("GET", pagefile);
@@ -163,13 +163,13 @@ function navigate(newlocation) {
     disableBackButton();
     disableForwardButton();
     getpage(newlocation,function(page) {
-        const historyStartLength = history.length-1;
+        const historyStartLength = pagehistory.length-1;
         for(var i = historyIndex;i<historyStartLength;i++) {
-            history.pop();
+            pagehistory.pop();
         }
-        historyIndex = history.length;
+        historyIndex = pagehistory.length;
         settitle(newlocation);
-        history.push(newlocation);
+        pagehistory.push(newlocation);
         clearpages();
         addpages(page.split("[end-page]"));
         if(nav2shown) {
@@ -183,14 +183,14 @@ function navigate(newlocation) {
 function logicalbuttonset() {
     if(historyIndex === 0) {
         disableBackButton();
-        if(history.length > 1) {
+        if(pagehistory.length > 1) {
             enableForwardButton();
         } else {
             disableForwardButton();
         }
         disablepostindexbuttons();
         return;
-    } else if(historyIndex === history.length-1) {
+    } else if(historyIndex === pagehistory.length-1) {
         enableBackButton();
         disableForwardButton();
     }
@@ -199,8 +199,8 @@ function logicalbuttonset() {
 function buttonnavigate(callback) {
     disableBackButton();
     disableForwardButton();
-    getpage(history[historyIndex],function(page) {
-        settitle(history[historyIndex]);
+    getpage(pagehistory[historyIndex],function(page) {
+        settitle(pagehistory[historyIndex]);
         clearpages();
         addpages(page.split("[end-page]"));
         logicalbuttonset();
@@ -322,6 +322,12 @@ function addpages(textwithhtml) {
     }
 }
 function setup() {
+    //this is just fucked up honestly, but what alternative is there?
+    history.pushState(null, null, location.href);
+    window.onpopstate = function () {
+        history.go(1);
+    };
+
     if(window.location.hash === "") {
         loadIndex();
         return;
@@ -333,7 +339,6 @@ function setup() {
         case null:
         case "":
         case "index":
-            window.location.hash = "";
             loadIndex();
             break;
         default:
