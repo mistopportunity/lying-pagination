@@ -338,7 +338,7 @@ function setup() {
             break;
         default:
             navigating = false;
-            navigate(window.location.hash);
+            navigate(hash);
             break;
     }
 }
