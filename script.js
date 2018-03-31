@@ -327,7 +327,6 @@ function setup() {
     window.onpopstate = function () {
         history.go(1);
     };
-
     if(window.location.hash === "") {
         loadIndex();
         return;
@@ -342,6 +341,10 @@ function setup() {
             loadIndex();
             break;
         default:
+            if(!hash.startsWith("page/")) {
+                loadIndex();
+                break;
+            }
             navigating = false;
             navigate(hash);
             break;
