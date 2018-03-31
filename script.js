@@ -133,6 +133,7 @@ function disablepostindexbuttons() {
 }
 function settitle(title) {
     document.title = title;
+    window.location.hash = title;
     document.getElementById("title").textContent = title;
 }
 let historyIndex = 0;
@@ -168,7 +169,6 @@ function navigate(newlocation) {
         }
         historyIndex = history.length;
         settitle(newlocation);
-        window.location.hash = newlocation;
         history.push(newlocation);
         clearpages();
         addpages(page.split("[end-page]"));
@@ -201,7 +201,6 @@ function buttonnavigate(callback) {
     disableForwardButton();
     getpage(history[historyIndex],function(page) {
         settitle(history[historyIndex]);
-        window.location.hash = newlocation;
         clearpages();
         addpages(page.split("[end-page]"));
         logicalbuttonset();
@@ -280,11 +279,9 @@ function loadIndex(callback) {
         if(client.status === 200 || client.status === 0) {
             addpages([client.responseText]);
             settitle("index");
-            window.location.hash = "";
         } else {
             addpages(["Error loading index file. Sorry :("])
-            settitle("whoops");
-            window.location.hash = "";
+            settitle("index");
         }
         if(bookmarkPages.length > 0) {
             addpages(bookmarkPages);
@@ -298,8 +295,7 @@ function loadIndex(callback) {
     client.onerror = function() {
         clearpages();
         addpages(["Error loading index file. Sorry :("])
-        settitle("whoops");
-        window.location.hash = "";
+        settitle("index");
         if(bookmarkPages.length > 0) {
             addpages(bookmarkPages);
         }
