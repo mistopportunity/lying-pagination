@@ -267,34 +267,27 @@ function loadIndex(callback) {
     const client = new XMLHttpRequest();
     client.open("GET", "pages/index");
     const bookmarks = getbookmarks();
-    const bookmarkPages = [];
+    let bookmarkpage = null;
     if(bookmarks !== null && bookmarks.length !== 0) {
-        let runningPage = '<span class="bold underline">your bookmarks</span><br><br>';
-        let runningCount = 1;
+        bookmarkpage = '<span class="bold underline">your bookmarks</span><br><br>';
         for(let i = 0;i<bookmarks.length;i++) {
-            if(runningCount == 12) {
-                runningCount = 0;
-                bookmarkPages.push(runningPage);
-                runningPage = "";
+            bookmarkpage += `<span class="link" onclick="navigate('${bookmarks[i]}')">${i+1}. ${bookmarks[i]}</span><br>`;
+            if(i < bookmarks.length-1) {
+                bookmarkpage += "<br>";
             }
-            runningCount++;
-            runningPage += `<span class="link" onclick="navigate('${bookmarks[i]}')">${i+1}. ${bookmarks[i]}</span><br><br>`;
-        }
-        if(runningPage !== "") {
-            bookmarkPages.push(runningPage);
         }
     }
     client.onload = function() {
         clearpages();
+        if(bookmarkpage.length !== null) {
+            addpages([bookmarkpage]);
+        }
         if(client.status === 200 || client.status === 0) {
             addpages(client.responseText.split("[end-page]"));
             settitle(websitetitle);
         } else {
             addpages(["Error loading index file. Sorry :("])
             settitle(websitetitle);
-        }
-        if(bookmarkPages.length > 0) {
-            addpages(bookmarkPages);
         }
         if(callback) {
             callback();
@@ -304,11 +297,11 @@ function loadIndex(callback) {
     }
     client.onerror = function() {
         clearpages();
+        if(bookmarkpage.length !== null) {
+            addpages([bookmarkpage]);
+        }
         addpages(["Error loading index file. Sorry :("])
         settitle(websitetitle);
-        if(bookmarkPages.length > 0) {
-            addpages(bookmarkPages);
-        }
         if(callback) {
             callback();
         }
