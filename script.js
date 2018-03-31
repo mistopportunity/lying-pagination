@@ -1,4 +1,5 @@
 "use strict";
+const websitetitle = document.title;
 const pages = document.getElementById("pages");
 let light = true;
 function defaultLightSet() {
@@ -132,8 +133,13 @@ function disablepostindexbuttons() {
     indexbutton.textContent = "";
 }
 function settitle(title) {
-    document.title = title;
-    window.location.hash = title;
+    if(title !== websitetitle) {
+        window.location.hash = title;
+        document.title = `${websitetitle}: ${title}`
+    } else {
+        window.location.hash = "index";
+        document.title = title;
+    }
     document.getElementById("title").textContent = title;
 }
 let historyIndex = 0;
@@ -162,6 +168,10 @@ function navigate(newlocation) {
     navigating = true;
     disableBackButton();
     disableForwardButton();
+    if(newlocation.indexOf("/") < 0) {
+        loadIndex();
+        return;
+    }
     getpage(newlocation,function(page) {
         const historyStartLength = pagehistory.length-1;
         for(var i = historyIndex;i<historyStartLength;i++) {
@@ -278,10 +288,10 @@ function loadIndex(callback) {
         clearpages();
         if(client.status === 200 || client.status === 0) {
             addpages(client.responseText.split("[end-page]"));
-            settitle("index");
+            settitle(websitetitle);
         } else {
             addpages(["Error loading index file. Sorry :("])
-            settitle("index");
+            settitle(websitetitle);
         }
         if(bookmarkPages.length > 0) {
             addpages(bookmarkPages);
@@ -295,7 +305,7 @@ function loadIndex(callback) {
     client.onerror = function() {
         clearpages();
         addpages(["Error loading index file. Sorry :("])
-        settitle("index");
+        settitle(websitetitle);
         if(bookmarkPages.length > 0) {
             addpages(bookmarkPages);
         }
@@ -341,7 +351,7 @@ function setup() {
             loadIndex();
             break;
         default:
-            if(!hash.startsWith("page/")) {
+            if(hash.indexOf("/") < 0) {
                 loadIndex();
                 break;
             }
