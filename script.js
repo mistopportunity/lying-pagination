@@ -323,7 +323,7 @@ function addpages(textwithhtml) {
 }
 function setup() {
     //this is just fucked up honestly, but what alternative is there?
-    history.pushState(null, null, location.href);
+    history.pushState(null, "index", location.href);
     window.onpopstate = function () {
         history.go(1);
     };
