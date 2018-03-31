@@ -4,38 +4,42 @@ body, html {
     padding: 0;
     margin: 0;
 }
-#pages div p {
+#pages p {
     margin: 0;
     padding: 3vh;
     font-family: monospace;
     font-size: 2.5vh;
     line-height: 3vh;
 }
-#pages div p span.bold {
-    font-weight: bold;
+#pages span.bold {
+    font-weight: bolder;
 }
-#pages div p span.underline {
+#pages span.underline {
     text-decoration: underline;
 }
-#pages div p span.link {
+#pages span.link, #pages a {
     cursor: pointer;
+    font-family: serif;
     padding-left: 1vh;
     padding-right: 1.4vh;
     padding-top: 0.25vh;
     padding-bottom: 0.25vh;
 }
-.light #pages div p span.link {
+.light #pages span.link, .light #pages a  {
     color: white;
     background-color: #252525;
 }
-.dark #pages div p span.link {
+.dark #pages span.link, .dark #pages a  {
     color: #000000;
     background-color: #ffffff;
 }
-#pages div p span.link:hover {
+#pages a {
+    text-decoration: none;
+}
+#pages span.link:hover, #pages a:hover {
     text-decoration: underline;
 }
-.dark #pages div p span.light-only {
+.dark #pages span.light-only {
     color: #000000;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -44,7 +48,7 @@ body, html {
     -ms-user-select: none;
     user-select: none;
 }
-.light #pages div p span.dark-only {
+.light #pages span.dark-only {
     color: white;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -53,16 +57,16 @@ body, html {
     -ms-user-select: none;
     user-select: none;
 }
-.dark #pages div p span.dark-only {
-    color: #3e3e3e;
+.dark #pages span.dark-only {
+    color: #656565;
 }
-.light #pages div p span.light-only {
+.light #pages span.light-only {
     color: #ababab;
 }
-.dark #pages div p span.light-overlap {
+.dark #pages span.light-overlap {
     display: none;
 }
-.light #pages div p span.dark-overlap {
+.light #pages span.dark-overlap {
     display: none;
 }
 .light {
@@ -145,6 +149,21 @@ body, html {
 #pages {
     margin-bottom: 1.8vh;
 }
+#pages img, #pages iframe {
+    display: block;
+    width: 60vh;
+    margin-left: auto;
+    margin-right: auto;
+}
+#pages iframe {
+    height: 39vh;
+}
+.dark #pages iframe {
+    background-color: white;
+}
+.light #pages iframe {
+    background-color: black;
+}
 @media only screen and (max-width: 78.6vh) {
     #pages div {
         width: 92vw;
@@ -178,6 +197,12 @@ body, html {
         top: 15vw;
     }
 
+    #pages iframe, #pages img {
+        width: 72.3vw;
+    }
+    #pages iframe {
+        height: 47.58vw;
+    }
 
     #pages div p span.link {    
         padding-left: 1.2vw;
@@ -231,4 +256,3 @@ body, html {
 #lightToggle:not(.disabled):hover,#forwardbutton:not(.disabled):hover,#backbutton:not(.disabled):hover {
     background-color: #393b40;
 }
-

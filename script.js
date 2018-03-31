@@ -277,7 +277,7 @@ function loadIndex(callback) {
     client.onload = function() {
         clearpages();
         if(client.status === 200 || client.status === 0) {
-            addpages([client.responseText]);
+            addpages(client.responseText.split("[end-page]"));
             settitle("index");
         } else {
             addpages(["Error loading index file. Sorry :("])

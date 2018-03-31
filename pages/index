@@ -8,7 +8,7 @@ format support: <span class="bold">bold & underline</span><br><br>
 
 <span class="bold">light-overlap & dark-overlap</span> - elements remain unrendered out of their light setting - be weary of overflowing the page<br><br>
 
-<span class="bold">[end-page]</span> ends the page (but not on the index)<br><br>
+<span class="bold">&#91;end-page&#93;</span> ends the page (even on the index)<br><br>
 
 
 <span class="link" onclick="navigate('pages/dummy1')">
@@ -28,6 +28,13 @@ format support: <span class="bold">bold & underline</span><br><br>
 </span>
 <br><br>
 
-<span class="dark-only">You can only see this in the dark, ;)</span><br>
+<a href="https://www.google.com/">Open Google</a><br><br>
 
-50 characters per line, no line limit, but page breaks plz
+50 characters per line, no line limit, but page breaks plz<br><br>
+
+[end-page]
+Videos and pictures can be embedded now, too.<br>Keep YouTube embeds at 560x315.<br><br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=PLx0sYbCqOb8TBPRdmBHs5Iftvv9TPboYG" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<br>
+<img src="coloring.jpg" alt="a family friendly meme"/><br>
+<img src="" alt="a picture that didn't load"/>
