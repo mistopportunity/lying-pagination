@@ -139,7 +139,7 @@ function settitle(title) {
 
     if(title !== websitetitle) {
         window.location.hash = title;
-        document.title = `${websitetitle}: ${filename}`
+        document.title = `${websitetitle}: ${title}`
     } else {
         window.location.hash = "index";
         document.title = websitetitle;
