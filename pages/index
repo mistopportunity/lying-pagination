@@ -23,7 +23,7 @@ format support: <span class="bold">bold & underline</span><br><br>
 
 <br><br>
 
-<span class="link" onclick="navigate('pages/dummy3')">
+<span class="link" onclick="navigate('pages/a cool pagew')">
     <span class="light-overlap">3. dummy three</span><span class="dark-overlap">3. idiota tres</span>
 </span>
 <br><br>

@@ -133,14 +133,19 @@ function disablepostindexbuttons() {
     indexbutton.textContent = "";
 }
 function settitle(title) {
+
+    const titlesplit = title.split("/");
+    const filename = titlesplit[titlesplit.length-1];
+
     if(title !== websitetitle) {
         window.location.hash = title;
-        document.title = `${websitetitle}: ${title}`
+        document.title = `${websitetitle}: ${filename}`
     } else {
         window.location.hash = "index";
-        document.title = title;
+        document.title = websitetitle;
     }
-    document.getElementById("title").textContent = title;
+
+    document.getElementById("title").textContent = filename;
 }
 let historyIndex = 0;
 let pagehistory = ["pages/index"];
