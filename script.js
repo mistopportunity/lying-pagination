@@ -1,5 +1,7 @@
 "use strict";
 const websitetitle = document.title;
+const pagesroot = "posts";
+const indexlocation = `${pagesroot}/Index`;
 const pages = document.getElementById("pages");
 let light = true;
 function defaultLightSet() {
@@ -141,14 +143,14 @@ function settitle(title) {
         window.location.hash = title;
         document.title = `${websitetitle}: ${title}`
     } else {
-        window.location.hash = "index";
+        window.location.hash = "Index";
         document.title = websitetitle;
     }
 
     document.getElementById("title").textContent = filename;
 }
 let historyIndex = 0;
-let pagehistory = ["pages/index"];
+let pagehistory = [indexlocation];
 function getpage(pagefile,callback) {
     const client = new XMLHttpRequest();
     client.open("GET", pagefile);
@@ -173,7 +175,7 @@ function navigate(newlocation) {
     navigating = true;
     disableBackButton();
     disableForwardButton();
-    if(newlocation.indexOf("/") < 0 || newlocation === "pages/index") {
+    if(newlocation.indexOf("/") < 0 || newlocation === indexlocation) {
         loadIndex();
         return;
     }
@@ -270,11 +272,11 @@ function returntoindex() {
 function loadIndex(callback) {
     logicalbuttonset();
     const client = new XMLHttpRequest();
-    client.open("GET", "pages/index");
+    client.open("GET",indexlocation);
     const bookmarks = getbookmarks();
     let bookmarkpage = null;
     if(bookmarks !== null && bookmarks.length !== 0) {
-        bookmarkpage = '<span class="bold underline">your bookmarks</span><br><br>';
+        bookmarkpage = '<span class="bold underline">Your Bookmarks</span><br><br>';
         for(let i = 0;i<bookmarks.length;i++) {
             bookmarkpage += `<span class="link" onclick="navigate('${bookmarks[i]}')">${i+1}. ${bookmarks[i]}</span><br>`;
             if(i < bookmarks.length-1) {
@@ -331,7 +333,7 @@ function addpages(textwithhtml) {
 }
 function setup() {
     //this is just fucked up honestly, but what alternative is there?
-    history.pushState(null, "index", location.href);
+    history.pushState(null, "Index", location.href);
     window.onpopstate = function () {
         history.go(1);
     };
@@ -345,8 +347,8 @@ function setup() {
     switch(hash) {
         case null:
         case "":
-        case "pages/index":
-        case "index":
+        case indexlocation:
+        case "Index":
             loadIndex();
             break;
         default:

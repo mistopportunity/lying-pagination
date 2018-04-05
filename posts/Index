@@ -1,0 +1,13 @@
+<span class="bold underline">Posts</span><br><br>
+
+<span class="link" onclick="navigate('posts/Recovering')">
+4/4/2018: The short but unforgettable third post
+</span><br><br>
+
+<span class="link" onclick="navigate('posts/Dying')">
+4/3/2018: The infamous and fan favorite second post
+</span><br><br>
+
+<span class="link" onclick="navigate('posts/Running')">
+4/2/2018: The very defining first post that started it all
+</span>
