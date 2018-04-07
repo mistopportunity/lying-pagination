@@ -1,5 +1,13 @@
 <span class="bold underline">Posts</span><br><br>
 
+<span class="link" onclick="navigate('posts/Greater or equal')">
+4/6/2018: Pushing the boundaries of writing on the actual date
+</span><br><br>
+
+<span class="link" onclick="navigate('posts/Chairs & wheels')">
+4/5/2018: Wonderful insight about chairs and wheels
+</span><br><br>
+
 <span class="link" onclick="navigate('posts/Recovering')">
 4/4/2018: The short but unforgettable third post
 </span><br><br>
